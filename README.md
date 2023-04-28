@@ -1,1 +1,1 @@
-# type-theory
+# Type Theory
