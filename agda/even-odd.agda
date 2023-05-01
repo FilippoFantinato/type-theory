@@ -41,7 +41,7 @@ lemma-sum-mixed base-even b = b
 lemma-sum-mixed (step-even a) b = step-odd (lemma-sum-mixed a b)
 
 
-lemma-one-not-even : (Even (succ zero)) → ∅
+lemma-one-not-even : Even (succ zero) → ⊥
 lemma-one-not-even ()
 
 lemma-even-odd : (a : ℕ) → (Even a) ⊎ (Odd a)
@@ -51,3 +51,12 @@ lemma-even-odd (succ n) with lemma-even-odd n
 ... | right x = left (lemma-succ-odd x)
 
 
+-- Prove that it's not the case that succeccors of even numbers are even
+lemma-succ-even-not-even : ((n : ℕ) → Even n → Even (succ n)) → ⊥
+lemma-succ-even-not-even f = lemma-one-not-even (f zero base-even)
+
+
+
+lemma-double-even : (a : ℕ) → Even (a + a)
+lemma-double-even zero     = base-even
+lemma-double-even (succ a) = {!!}

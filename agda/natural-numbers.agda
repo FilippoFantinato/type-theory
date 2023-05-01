@@ -24,6 +24,11 @@ _+_ : ℕ → ℕ → ℕ
 zero + y = y
 (succ x) + y = succ (x + y)
 
+
+_+'_ : ℕ → ℕ → ℕ
+x +' zero = x
+x +' (succ y) = succ (x + y)
+
 -- EXERCISE: Define (cut-off) subtraction.
 _-_ : ℕ → ℕ → ℕ
 zero - y = zero
@@ -61,3 +66,4 @@ even? : ℕ → Bool
 even? zero = true
 even? (succ zero) = false
 even? (succ n) = ¬ (even? n)
+
