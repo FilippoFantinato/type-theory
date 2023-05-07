@@ -1,6 +1,6 @@
-module empty-type where
+module types.empty where
 
-open import natural-numbers
+open import types.natural-numbers
 
 data ⊥ : Set where
 

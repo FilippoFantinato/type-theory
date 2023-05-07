@@ -1,23 +1,9 @@
-module booleans where
+module exercises.booleans where
 
-data Bool : Set where
-  true  : Bool
-  false : Bool
+open import types.booleans
+open import types.sum
+open import types.empty
 
--- Negation
-¬_ : Bool → Bool
-¬ true = false
-¬ false = true
-
--- AND
-_&&_ : Bool → Bool → Bool
-_&&_ true y = y
-_&&_ false y = false
-
--- OR
-_||_ : Bool → Bool → Bool
-_||_ true y  = true
-_||_ false y = y
 
 -- EXERCISE: Implement a function "is-tautology₁?" which checks whether
 -- a given input function is constantly true.
@@ -28,5 +14,4 @@ is-tautology₁ f = (f true) && (f false)
 -- a given input function of two arguments is constantly true.
 is-tautology₂ : (Bool → Bool → Bool) → Bool
 is-tautology₂ f = (((f true true) && (f true false)) && (f false true)) && (f false false)
-
 
