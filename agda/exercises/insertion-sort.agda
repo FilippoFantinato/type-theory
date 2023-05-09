@@ -90,7 +90,3 @@ module correct-by-construction
 
   cheatsort : List A → OList min
   cheatsort xs = nil
-
-
-
-  

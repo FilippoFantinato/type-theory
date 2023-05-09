@@ -1,12 +1,14 @@
 module types.natural-numbers where
 
-
 open import types.booleans
-
 
 data ℕ : Set where
   zero : ℕ
   succ : ℕ → ℕ
+
+
+infix 6 _+_ _-_
+infix 7 _·_
 
 
 pred : ℕ → ℕ
@@ -40,7 +42,7 @@ zero - y = zero
 -- EXERCISE: Define multiplication
 _·_ : ℕ → ℕ → ℕ
 zero · y = zero
-(succ x) · y = x + (x · y)
+(succ x) · y = y + (x · y)
 
 
 -- EXERCISE: Define substraction
@@ -67,6 +69,6 @@ zero ≤ y = true
 
 
 -- EXERCISE: Define a function "even?" which determines whether its input is even.
-even? : ℕ → Bool
-even? zero = true
-even? (succ n) = ! (even? n)
+-- even? : ℕ → Bool
+-- even? zero = true
+-- even? (succ n) = ! (even? n)

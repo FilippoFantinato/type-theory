@@ -4,20 +4,9 @@ open import types.natural-numbers
 open import types.empty
 open import types.sum
 open import types.equality
+open import types.even-odd
 
 open import exercises.natural-numbers
-
-
--- Even n is the type of witnesses that n is even
-data Even : ℕ → Set where
-  base-even : Even zero
-  step-even : {n : ℕ} → Even n → Even (succ (succ n))
-
--- Odd n is the type of witnesses that n is odd
-data Odd : ℕ → Set where
-  base-odd : Odd (succ zero)
-  step-odd : {n : ℕ} → Odd n → Odd (succ (succ n))
-
 
 lemma-sum-even : {a b : ℕ} → Even a → Even b → Even (a + b)
 lemma-sum-even base-even b = b
@@ -48,13 +37,6 @@ lemma-sum-mixed (step-even a) b = step-odd (lemma-sum-mixed a b)
 
 lemma-one-not-even : Even (succ zero) → ⊥
 lemma-one-not-even ()
-
-lemma-even-odd : (a : ℕ) → (Even a) ⊎ (Odd a)
-lemma-even-odd zero = left base-even
-lemma-even-odd (succ n) with lemma-even-odd n
-... | left x = right (lemma-succ-even x)
-... | right x = left (lemma-succ-odd x)
-
 
 -- Prove that it's not the case that succeccors of even numbers are even
 lemma-succ-even-not-even : ((n : ℕ) → Even n → Even (succ n)) → ⊥

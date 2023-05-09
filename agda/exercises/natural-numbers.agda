@@ -1,9 +1,9 @@
-{-# OPTIONS --allow-unsolved-metas #-} 
+{-# OPTIONS --allow-unsolved-metas #-}
 
 module exercises.natural-numbers where
 
-open import types.natural-numbers
 open import types.equality
+open import types.natural-numbers
 open import types.empty
 open import types.positive
 
@@ -43,20 +43,35 @@ lemma-+-associative (succ a) b c = cong succ (lemma-+-associative a b c)
 
 
 ---------------------------
---------- PRODUCT ---------
+------ MULTIPLICATION -----
 ---------------------------
-
 
 lemma-·-distributive : (a b c : ℕ) → ((a + b) · c) ≡ ((a · c) + (b · c))
 lemma-·-distributive zero b c = refl (b · c)
-lemma-·-distributive (succ a) b c = {!!} {-begin
-  (((succ a) + b) · c)     ≡ () -- by definition
-  ((succ (a + b)) · c)     ≡ ()
-  c + ((a + b) · c)        ≡ ( cong (λ x → c + z ) (lemma-·-distributive a b c))
-  c + ((a · c) + (b · c)) ̄ ≡ (lemma-+-associative c (a · c) (b · c))
-  (c + (a · c)) + (b · c)  ≡ ()
-  ((succ a) · c) + (b · c) -}
+lemma-·-distributive (succ a) b c = begin
+  ((succ a + b) · c)        ≡⟨⟩  -- by definition
+  (succ (a + b) · c)        ≡⟨⟩  -- by definition
+  c + ((a + b) · c)         ≡⟨ cong (_+_ c) (lemma-·-distributive a b c) ⟩
+  c + ((a · c) + (b · c))   ≡⟨ lemma-+-associative c (a · c) (b · c) ⟩
+  (c + (a · c)) + (b · c)   ≡⟨⟩
+  (succ a · c) + (b · c)    ∎
 
+lemma-·-associative : (a b c : ℕ) → a · (b · c) ≡ (a · b) · c
+lemma-·-associative zero b c = refl zero
+lemma-·-associative (succ a) b c = begin
+  (succ a) · (b · c) ≡⟨⟩
+  (b · c) + a · (b · c) ≡⟨ cong (λ z → b · c + z) (lemma-·-associative a b c) ⟩
+  (b · c) + (a · b) · c ≡⟨ symm (lemma-·-distributive b (a · b) c) ⟩
+  (b + a · b) · c       ≡⟨⟩
+  (succ a · b) · c      ∎
+
+-- cong (λ z → b · c + z) (lemma-·-associative a b c)
+
+ --  {!(b · c) + (a · b) · c ≡⟨ symm  ? ⟩ !}
+ --  {!(b + a · b) · c 
+  -- (b · c) + a · (b · c) 
+  -- (b · c) + ((a · b) · c) ≡⟨⟩
+  -- ?
 
 ---------------------------
 -------- SUCC PRED --------
