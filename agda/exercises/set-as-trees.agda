@@ -1,21 +1,21 @@
-module types.trees where
+module exercises.set-as-trees where
 
+open import types.V
 open import types.empty
 open import types.natural-numbers
 
-data BinaryTree (A : Set) : Set where
-  nil : BinaryTree A
-  fork : A → BinaryTree A → BinaryTree A → BinaryTree A
+-- In predicative mathematics, we don't have the powerset operation
+-- P({a,b}) = {}
 
-
-exampleBinaryTree : {A : Set} → A → A → A → BinaryTree A
-exampleBinaryTree x y a = fork x nil (fork y (fork a nil nil)  nil)
+-- GOAL: define an Agda type V of sets accompanied by functions as
+-- emptySet : V        ∅
+-- pair : V → V → V    pair x y = {x,y}
+-- singleton : V → V   singleon x = {x}
+-- _⊎_ : V → V → V
+-- powerset : V → V    fail by defining it
 
 
 -- zero : ℕ : Set : Set₁ : Set₂ : Set₃ : ... : Setω : ...
-
-data V : Set₁ where
-  sup : {I : Set} → (I → V) → V
 
 -- Empty set defined via V type
 ∅ : V

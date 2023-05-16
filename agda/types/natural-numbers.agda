@@ -19,7 +19,8 @@ pred (succ k) = k
 -- EXERCISE: Define the function "half" which divides its input by two.
 half : ℕ → ℕ
 half zero = zero
-half (succ x) = succ (half x)
+half (succ zero) = zero
+half (succ (succ x)) = succ (half x)
 
 
 -- EXERCISE: Define sum.
