@@ -41,5 +41,3 @@ module _ {A : Set} where
   ≈→≡ : {xs ys : List A} → (xs ≈ ys) → (xs ≡ ys)
   ≈→≡ both-empty = refl []
   ≈→≡ (both-same-cons (refl x) xs) = cong (λ xs → (x ∷ xs)) (≈→≡ xs)
-
-  

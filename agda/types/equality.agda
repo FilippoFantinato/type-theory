@@ -20,7 +20,7 @@ symm : {A : Set} {x y : A} → (x ≡ y) → (y ≡ x)
 symm (refl a) = refl a
 
 trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-trans p q rewrite p = q
+trans (refl _) (refl q) = refl q
 
 transport : {A B : Set} {x y : A} → (F : A → Set) → x ≡ y → F x → F y
 transport F (refl s) = λ s → s

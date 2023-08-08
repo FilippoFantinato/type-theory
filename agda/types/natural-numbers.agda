@@ -36,8 +36,8 @@ x +' (succ y) = succ (x + y)
 
 -- EXERCISE: Define (cut-off) subtraction.
 _-_ : ℕ → ℕ → ℕ
-zero - y = zero
-(succ x) - y = succ (x - y)
+x - zero   = x
+x - succ y = pred (x - y)
 
 
 -- EXERCISE: Define multiplication

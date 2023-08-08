@@ -27,14 +27,20 @@ lemma-+-zero : (a : ℕ) → ((a + zero) ≡ a)
 lemma-+-zero zero = lemma-zero-identity
 lemma-+-zero (succ a) = cong succ (lemma-+-zero a)
 
+lemma-+-same-succ : {a b : ℕ} → a ≡ b → (succ a) ≡ (succ b)
+lemma-+-same-succ el = cong succ el
+
 lemma-+-succ : (a b : ℕ) → ((a + (succ b)) ≡ succ (a + b))
 lemma-+-succ zero b     = refl (succ b)
 lemma-+-succ (succ a) b = cong succ (lemma-+-succ a b)
 
-lemma-+-commutative : (a b : ℕ) → ((a + b) ≡ (b + a))
-lemma-+-commutative zero b = symm (lemma-+-zero b)
-lemma-+-commutative (succ a) b =
-  trans (cong succ (lemma-+-commutative a b)) (symm (lemma-+-succ b a))
+lemma-+-commutative : (a b : ℕ) → ((b + a) ≡ (a + b))
+lemma-+-commutative zero b = lemma-+-zero b
+lemma-+-commutative (succ a) b = trans (lemma-+-succ b a) (cong succ (lemma-+-commutative a b))
+
+lemma-same-sum : (x y : ℕ) → (x + y) ≡ (x +' y)
+lemma-same-sum x zero = lemma-+-zero x
+lemma-same-sum x (succ y) = lemma-+-succ x y
 
 -- EXERCISE: Verify that addition is associative.
 lemma-+-associative : (a b c : ℕ) → (a + (b + c)) ≡ ((a + b) + c)
