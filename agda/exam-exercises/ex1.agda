@@ -1,4 +1,4 @@
-module exam.ex1 where
+module exam-exercises.ex1 where
 
 -- Define Boolean type
 data Bool : Set where

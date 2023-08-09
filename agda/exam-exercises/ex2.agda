@@ -1,4 +1,4 @@
-module exam.ex2 where
+module exam-exercises.ex2 where
 
 open import types.natural-numbers
 open import types.equality
