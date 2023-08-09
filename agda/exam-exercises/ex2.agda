@@ -1,7 +1,6 @@
 module exam-exercises.ex2 where
 
 open import types.natural-numbers
-open import types.equality
 
 -- Define the List type
 data List (A : Set) : Set where
@@ -65,7 +64,3 @@ reverseV (x ∷ xs) = snocV (reverseV xs) x
 concatV : {A : Set} {n m : ℕ} →  Vector (Vector A n) m → Vector A (m · n)
 concatV [] = []
 concatV (x ∷ xs) = x ++ concatV xs
-
-lemma-take-drop : {A : Set} {n : ℕ} → (k : ℕ) → (x : Vector A (k + n)) → (takeV k x ++ dropV k x) ≡ x
-lemma-take-drop zero x = refl x
-lemma-take-drop (succ k) (x ∷ xs) = cong (λ xs → x ∷ xs) (lemma-take-drop k xs)
