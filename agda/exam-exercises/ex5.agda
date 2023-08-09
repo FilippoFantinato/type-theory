@@ -1,4 +1,4 @@
-module exam.ex5 where
+module exam-exercises.ex5 where
 
 open import types.empty
 open import types.natural-numbers
@@ -10,70 +10,6 @@ open import types.even-odd
 data List (A : Set) : Set where
   []  : List A
   _∷_ : A → List A → List A
-
-module _ {A : Set} where
-  -- the "snoc" operation ("backwards cons"),
-  -- i.e. append an element at the end
-  _∷ʳ_ : List A → A → List A
-  []       ∷ʳ y = y ∷ []
-  (x ∷ xs) ∷ʳ y = x ∷ (xs ∷ʳ y)
-
-  -- for instance, "reverse (a ∷ b ∷ c ∷ [])" is "c ∷ b ∷ a ∷ []".
-  reverse : List A → List A
-  reverse []       = []
-  reverse (x ∷ xs) = reverse xs ∷ʳ x
-
-  -- EXERCISE: Verify the following lemma.
-  lemma-reverse-∷ʳ : (ys : List A) (x : A) → reverse (ys ∷ʳ x) ≡ (x ∷ reverse ys)
-  lemma-reverse-∷ʳ ys x = {!!}
-
-  lemma-reverse-reverse : (xs : List A) → reverse (reverse xs) ≡ xs
-  lemma-reverse-reverse xs = {!!}
-
-  -- EXERCISE: State and prove that _++_ on lists is associative.
-  _++_ : List A → List A → List A
-  []       ++ ys = ys
-  (x ∷ xs) ++ ys = x ∷ (xs ++ ys)
-
-  -- The following relation relates exactly those lists which have the same length
-  -- and whose corresponding entries are equal.
-  data _≈_ : List A → List A → Set where
-    both-empty     : [] ≈ []
-    both-same-cons : {xs ys : List A} {x y : A} → x ≡ y → xs ≈ ys → (x ∷ xs) ≈ (y ∷ ys)
-
-  -- EXERCISE: Show that equal lists are related by _≈_.
-  ≡→≈ : {xs ys : List A} → xs ≡ ys → xs ≈ ys
-  ≡→≈ p = {!!}
-
-  -- EXERCISE: Show that related lists are equal.
-  ≈→≡ : {xs ys : List A} → xs ≈ ys → xs ≡ ys
-  ≈→≡ p = {!!}
-
--- EQUALITY OF VECTORS
-
-data Vector (A : Set) : ℕ → Set where
-  []  : Vector A zero
-  _∷_ : {n : ℕ} → A → Vector A n → Vector A (succ n)
-
-drop : {A : Set} {n : ℕ} (k : ℕ) → Vector A (k + n) → Vector A n
-drop zero      xs        = xs
-drop (succ k') (x ∷ xs') = drop k' xs'
-
-take : {A : Set} {n : ℕ} (k : ℕ) → Vector A (k + n) → Vector A k
-take zero      xs        = []
-take (succ k') (x ∷ xs') = x ∷ take k' xs'
-
-_++ᵥ_ : {A : Set} {n m : ℕ} → Vector A n → Vector A m → Vector A (n + m)
-[]        ++ᵥ ys = ys
-(x ∷ xs') ++ᵥ ys = x ∷ (xs' ++ᵥ ys)
-
--- EXERCISE: Verify the following lemma.
-lemma-take-drop : {A : Set} {n : ℕ} → (k : ℕ) → (xs : Vector A (k + n)) → (take k xs ++ᵥ drop k xs) ≡ xs
-lemma-take-drop = {!!}
-
--- EXERCISE: Find out where the difficulty is in stating that _++ᵥ_ on
--- vectors is associative.
-
 
 -- EXERCISE: Define a predicate "AllEven" for lists of natural numbers
 -- such that "AllEven xs" is inhabited if and only if all entries of the list "xs" are even.

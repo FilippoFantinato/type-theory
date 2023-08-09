@@ -1,10 +1,18 @@
-module exam.ex4 where
+module exam-exercises.ex4 where
 
 open import types.natural-numbers
 open import types.empty
 open import types.lists
 open import types.equality
-open import types.even-odd
+
+
+data Bool : Set where
+  true  : Bool
+  false : Bool
+
+!_ : Bool → Bool
+! true = false
+! false = true
 
 -- EXERCISE: Show that the two functions "even?" and "even?'" have the same values.
 even? : ℕ → Bool
@@ -124,8 +132,3 @@ lemma-·-commutative (succ a) b = begin
   b + (a · b) ≡⟨ cong (_+_ b) (lemma-·-commutative a b) ⟩
   b + (b · a) ≡⟨ symm (lemma-·-succ b a) ⟩
   b · succ a ∎
-
-
--- EXERCISE: Show that the double of any number is even
-lemma-double-even : (a : ℕ) → Even (a + a)
-lemma-double-even a = {!!}

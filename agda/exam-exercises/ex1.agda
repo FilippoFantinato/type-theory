@@ -1,5 +1,7 @@
 module exam-exercises.ex1 where
 
+open import types.equality
+
 -- Define Boolean type
 data Bool : Set where
   true  : Bool
@@ -99,6 +101,14 @@ lemma-sum-odd a (step-odd b) = step-even (lemma-sum-odd a b)
 lemma-sum-mixed : {a b : ℕ} → Even a → Odd b → Odd (a + b)
 lemma-sum-mixed a base-odd = lemma-succ-even a
 lemma-sum-mixed a (step-odd b) = step-odd (lemma-sum-mixed a b)
+
+lemma-+-succ : (a b : ℕ) → ((succ a + b) ≡ (succ (a + b)))
+lemma-+-succ a zero = refl (succ a)
+lemma-+-succ a (succ b) = cong succ (lemma-+-succ a b)
+
+lemma-double-even : (a : ℕ) → Even (a + a)
+lemma-double-even zero = base-even
+lemma-double-even (succ a) rewrite (lemma-+-succ a a) = step-even (lemma-double-even a)
 
 
 -- Define Sum type
